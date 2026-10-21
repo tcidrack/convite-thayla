@@ -236,7 +236,7 @@ body {
 .idade {
   display: flex;
   align-items: flex-end;
-  gap: 4px;
+  gap: 10px;
 }
 
 .idade-numero {
