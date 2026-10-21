@@ -52,6 +52,27 @@ python arte/gerar-recortes.py
 
 Trocou alguma arte? Ajuste a tabela `RECORTES` no script e rode de novo.
 
+### Fotos da Thayla (janela depois de confirmar)
+
+Depois que o convidado confirma presença abre uma janela de agradecimento com as fotos
+aparecendo e sumindo, da recém-nascida até hoje (`src/componentes/GaleriaFotos.jsx`). Quem já
+confirmou vê o botão "Ver minhas fotinhas".
+
+**As fotos nunca vão para o GitHub** (o repositório é público). Elas ficam no Supabase Storage:
+
+1. Coloque as originais em `../fotos-thayla/` (pasta no `.gitignore`) e ajuste a ordem na
+   lista `ORDEM` de **`arte/gerar-fotos.py`**.
+2. `python arte/gerar-fotos.py` → gera `../fotos-thayla/para-subir/thayla-01.jpg …`
+   (retrato 720×900, ~70 KB, sem EXIF/localização).
+3. Rode o bloco 6 do `database.sql` (cria o bucket público `convite-thayla`).
+4. No painel do Supabase: **Storage → convite-thayla →** pasta **`fotos`** → arraste os
+   arquivos de `para-subir/`.
+5. Se mudar a quantidade, ajuste `fotos.quantidade` em `configuracaoTema.js`.
+
+Para testar sem Supabase: copie as fotos para `public/fotos-teste/` e crie um `.env.local`
+com `VITE_FOTOS_URL=/fotos-teste/` (os dois ficam fora do git). Apague os dois antes do build
+de produção.
+
 ### Música (caixinha de música)
 
 `public/assets/musica-caixinha.mp3` é o tema de "Para Elisa" (Beethoven, domínio público)

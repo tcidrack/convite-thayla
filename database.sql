@@ -83,3 +83,18 @@ GRANT EXECUTE ON FUNCTION public.confirmar_presenca_thayla(TEXT) TO anon;
 -- ── 5. Limpeza de teste ───────────────────────────────────────
 --
 -- DELETE FROM public.confirmacoes_aniversario_thayla WHERE nome ILIKE 'TESTE%';
+
+
+-- ── 6. Bucket das fotos (Storage) ─────────────────────────────
+-- As fotos da Thayla ficam aqui, e NAO no GitHub (o repositorio e publico).
+-- Bucket publico: as fotos abrem pela URL
+--   <projeto>.supabase.co/storage/v1/object/public/convite-thayla/fotos/thayla-01.jpg
+-- sem precisar de policy. Enviar arquivo continua so pelo painel (a chave
+-- anon nao tem permissao de upload).
+--
+-- Depois de rodar: Storage > convite-thayla > crie a pasta `fotos` e arraste
+-- os arquivos de fotos-thayla/para-subir/ (gerados por frontend/arte/gerar-fotos.py).
+
+INSERT INTO storage.buckets (id, name, public)
+VALUES ('convite-thayla', 'convite-thayla', true)
+ON CONFLICT (id) DO UPDATE SET public = true;

@@ -17,3 +17,5 @@ __pycache__/
 
 # fotos da aniversariante: ficam so no computador, nunca no repositorio
 fotos-thayla/
+# copia local das fotos so para testar sem Supabase
+frontend/public/fotos-teste/

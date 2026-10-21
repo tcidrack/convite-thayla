@@ -68,6 +68,21 @@ export const tema = {
     volume: 0.35,
   },
 
+  // Fotos da Thayla na janela de agradecimento (abre depois de confirmar).
+  // Ficam no Supabase Storage, NUNCA no GitHub: bucket publico `bucket`, pasta
+  // `pasta`, arquivos thayla-01.jpg, thayla-02.jpg... (arte/gerar-fotos.py)
+  fotos: {
+    bucket: 'convite-thayla',
+    pasta: 'fotos',
+    // << EDITE AQUI >> se tirar ou colocar fotos
+    quantidade: 20,
+    intervalo: 3200, // ms que cada foto fica na tela
+    titulo: 'Obrigada por confirmar! 💖',
+    subtitulo: 'Olha só como eu cresci...',
+    botaoVer: 'Ver minhas fotinhas',
+    botaoAgenda: 'Adicionar à agenda',
+  },
+
   // Assinatura discreta no rodape do convite
   assinatura: {
     texto: 'Feito com ♥ por',

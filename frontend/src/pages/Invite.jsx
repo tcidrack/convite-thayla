@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { supabase } from "../services/supabase"
 import { tema, criarUrlCalendario } from "../configuracaoTema"
-import { IconePin, IconeCheck } from "../componentes/Icones"
+import { IconePin, IconeCheck, IconeCamera } from "../componentes/Icones"
 import Cenario from "../componentes/Cenario"
 import BailarinaGirando from "../componentes/BailarinaGirando"
 import BotaoMusica from "../componentes/BotaoMusica"
+import GaleriaFotos from "../componentes/GaleriaFotos"
 
 const r = tema.recursos
 const urlMaps = tema.calendario.mapsUrl
@@ -38,6 +39,7 @@ export default function Invite() {
   const [nome, setNome] = useState("")
   const [mostrarConfirmacao, setMostrarConfirmacao] = useState(false)
   const [confirmando, setConfirmando] = useState(false)
+  const [mostrarFotos, setMostrarFotos] = useState(false)
   const [toast, setToast] = useState(null)
   const [jaConfirmado, setJaConfirmado] = useState(
     () => localStorage.getItem(CHAVE_LOCAL) !== null
@@ -66,11 +68,10 @@ export default function Invite() {
     setJaConfirmado(true)
     setNome("")
     setMostrarConfirmacao(false)
-    try {
-      window.open(urlCalendario, "_blank")
-    } catch (e) {
-      console.info("Não foi possível abrir calendário:", e)
-    }
+    // Em vez de abrir a agenda sozinho (o navegador bloqueia window.open depois
+    // de um await, e a aba nova escondia tudo), abre a janela de agradecimento
+    // com as fotos; a agenda vira um botao la dentro.
+    setMostrarFotos(true)
   }
 
   async function confirmar() {
@@ -183,10 +184,16 @@ export default function Invite() {
           </a>
 
           {jaConfirmado ? (
-            <div className="acao-confirmar confirmado">
-              <IconeCheck preenchido />
-              <span>Presença confirmada!</span>
-            </div>
+            <>
+              <div className="acao-confirmar confirmado">
+                <IconeCheck preenchido />
+                <span>Presença confirmada!</span>
+              </div>
+              <button type="button" className="acao-fotos" onClick={() => setMostrarFotos(true)}>
+                <IconeCamera />
+                <span>{tema.fotos.botaoVer}</span>
+              </button>
+            </>
           ) : (
             <button type="button" className="acao-confirmar" onClick={() => setMostrarConfirmacao(true)}>
               <IconeCheck />
@@ -230,6 +237,22 @@ export default function Invite() {
             <button className="btn-confirmar" onClick={confirmar} disabled={confirmando}>
               {confirmando ? "Confirmando..." : "Confirmar presença"}
             </button>
+          </div>
+        </div>
+      )}
+
+      {mostrarFotos && (
+        <div className="modal-overlay" onClick={() => setMostrarFotos(false)}>
+          <div className="modal modal-fotos" onClick={(e) => e.stopPropagation()}>
+            <button className="close-modal" onClick={() => setMostrarFotos(false)} aria-label="Fechar">
+              ✖
+            </button>
+            <h2>{tema.fotos.titulo}</h2>
+            <p>{tema.fotos.subtitulo}</p>
+            <GaleriaFotos />
+            <a href={urlCalendario} target="_blank" rel="noreferrer" className="btn-confirmar btn-agenda">
+              {tema.fotos.botaoAgenda}
+            </a>
           </div>
         </div>
       )}

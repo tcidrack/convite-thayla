@@ -37,3 +37,11 @@ export function IconeMusica({ mudo = false }) {
     </svg>
   )
 }
+
+export function IconeCamera() {
+  return (
+    <svg className="icone icone-solido" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M9.2 3h5.6a1 1 0 0 1 .9.6L16.6 6H20a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h3.4l.9-2.4a1 1 0 0 1 .9-.6zM12 8.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9zm0 2a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5z" />
+    </svg>
+  )
+}
