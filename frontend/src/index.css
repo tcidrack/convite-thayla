@@ -1106,6 +1106,57 @@ body {
   text-align: center;
 }
 
+/* --- senha da /admin --- */
+.admin-login {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 6px;
+}
+
+.admin-login input,
+.admin-login button,
+.admin-sair {
+  width: 100%;
+  font-family: var(--fonte-corpo);
+  font-size: 15px;
+  padding: 12px 14px;
+  border-radius: 14px;
+}
+
+.admin-login input {
+  border: 1.5px solid var(--fundo-escuro);
+  background: var(--branco);
+  color: var(--vinho);
+}
+
+.admin-login input:focus {
+  outline: none;
+  border-color: var(--rosa);
+}
+
+.admin-login button {
+  border: none;
+  background: linear-gradient(180deg, #EE9CB5 0%, var(--rosa) 100%);
+  color: var(--branco);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.admin-login button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.admin-sair {
+  margin-top: 16px;
+  border: 1.5px solid var(--rosa-claro);
+  background: transparent;
+  color: var(--rosa-escuro);
+  font-weight: 600;
+  cursor: pointer;
+}
+
 /* ============================ RESPONSIVO ============================ */
 
 @media (min-width: 640px) {

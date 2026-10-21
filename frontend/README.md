@@ -16,7 +16,7 @@ npm run build    # gera dist/
 |---|---|
 | `/` | Envelope com a bailarina; ao clicar, abre o convite |
 | `/convite` | O convite (local + confirmar presença) |
-| `/admin` | Lista de quem confirmou presença |
+| `/admin` | Lista de quem confirmou presença (pede senha) |
 
 ## Editar os dados do evento
 
@@ -32,13 +32,26 @@ Sem configurar nada, o convite já funciona: as confirmações ficam salvas no
 2. Rode o **`database.sql`** (na raiz, um nível acima desta pasta) no SQL Editor.
    Ele cria a tabela `confirmacoes_aniversario_thayla` e a função
    `confirmar_presenca_thayla` — com nome próprio para não sobrescrever a do chá de fraldas.
+   **Antes de rodar, troque `TROQUE_ESTA_SENHA` (bloco 7) pela senha da `/admin`.**
+
+A lista de convidados **não tem leitura pública**: a chave `anon` vai dentro do site, então
+com leitura liberada qualquer convidado conseguiria listar todos os nomes. A `/admin` lê pela
+função `listar_confirmados_thayla`, que confere a senha dentro do banco (só o hash bcrypt fica
+guardado, em `config_admin_thayla`). Para trocar a senha, rode o bloco 7 de novo com outra.
 
 ## Deploy (Vercel)
 
-1. **Root Directory = `frontend`**.
-2. **As duas variáveis de ambiente** (`VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`)
-   cadastradas **antes** do primeiro build — o Vite as embute em tempo de build.
-3. O `vercel.json` desta pasta faz o rewrite de SPA (sem ele `/convite` e `/admin` dão 404 no F5).
+Checklist antes de publicar:
+
+1. **`database.sql` rodado** no Supabase com a senha da `/admin` trocada. Conferir no SQL
+   Editor que nenhuma policy deixa ler a tabela (tem que voltar vazio):
+   `select policyname, cmd from pg_policies where tablename = 'confirmacoes_aniversario_thayla';`
+2. **Root Directory = `frontend`**.
+3. **As duas variáveis de ambiente** (`VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY`)
+   cadastradas **antes** do primeiro build — o Vite as embute em tempo de build. Use só a
+   chave **anon**; a `service_role` nunca vai para o site.
+4. O `vercel.json` desta pasta faz o rewrite de SPA (sem ele `/convite` e `/admin` dão 404 no F5).
+5. Não criar `VITE_FOTOS_URL` na Vercel (é só para teste local); as fotos vêm do Supabase.
 
 ## Imagens
 

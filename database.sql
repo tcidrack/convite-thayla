@@ -63,10 +63,11 @@ $$;
 
 ALTER TABLE public.confirmacoes_aniversario_thayla ENABLE ROW LEVEL SECURITY;
 
--- Leitura liberada: a /admin lista os confirmados.
+-- Leitura FECHADA de propósito. A chave anon vai dentro do site, então uma
+-- policy de select liberada deixava qualquer convidado listar o nome de todos.
+-- A /admin lê pela função listar_confirmados_thayla (bloco 7), que pede senha.
+-- (O DROP também desfaz a policy "select_publico" de versões antigas deste script.)
 DROP POLICY IF EXISTS "select_publico" ON public.confirmacoes_aniversario_thayla;
-CREATE POLICY "select_publico" ON public.confirmacoes_aniversario_thayla
-  FOR SELECT TO anon USING (true);
 
 -- Sem policy de insert de propósito: inserir só pela função acima,
 -- que é quem valida nome vazio e repetido.
@@ -98,3 +99,59 @@ GRANT EXECUTE ON FUNCTION public.confirmar_presenca_thayla(TEXT) TO anon;
 INSERT INTO storage.buckets (id, name, public)
 VALUES ('convite-thayla', 'convite-thayla', true)
 ON CONFLICT (id) DO UPDATE SET public = true;
+
+
+-- ── 7. Senha da /admin e leitura da lista ─────────────────────
+--
+--     >>> TROQUE 'TROQUE_ESTA_SENHA' PELA SENHA QUE VOCÊ QUER <<<
+--
+-- Guarda só o hash (bcrypt). A tabela tem RLS ligada e NENHUMA policy, então
+-- a chave anon não lê nada dela — só a função abaixo enxerga.
+-- Nome próprio (config_admin_thayla) porque este Supabase é o mesmo do chá de
+-- fraldas, que já usa config_admin: reusar sobrescreveria a senha de lá.
+-- Rodar de novo com outro valor troca a senha.
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA extensions;
+
+CREATE TABLE IF NOT EXISTS public.config_admin_thayla (
+  id         INTEGER PRIMARY KEY DEFAULT 1,
+  senha_hash TEXT NOT NULL,
+  CONSTRAINT config_admin_thayla_linha_unica CHECK (id = 1)
+);
+
+ALTER TABLE public.config_admin_thayla ENABLE ROW LEVEL SECURITY;
+
+INSERT INTO public.config_admin_thayla (id, senha_hash)
+VALUES (1, extensions.crypt('TROQUE_ESTA_SENHA', extensions.gen_salt('bf')))
+ON CONFLICT (id) DO UPDATE
+  SET senha_hash = EXCLUDED.senha_hash;
+
+-- A senha é conferida aqui dentro, no banco: conferir no JavaScript não
+-- adiantaria nada, já que o código roda no navegador de quem abre o site.
+CREATE OR REPLACE FUNCTION public.listar_confirmados_thayla(p_senha TEXT)
+RETURNS TABLE (id BIGINT, nome TEXT, created_at TIMESTAMP WITH TIME ZONE)
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = public, extensions
+AS $$
+BEGIN
+  IF NOT EXISTS (
+    SELECT 1 FROM public.config_admin_thayla ca
+     WHERE ca.senha_hash = extensions.crypt(coalesce(p_senha, ''), ca.senha_hash)
+  ) THEN
+    RAISE EXCEPTION 'SENHA_INVALIDA';
+  END IF;
+
+  RETURN QUERY
+  SELECT c.id, c.nome, c.created_at
+    FROM public.confirmacoes_aniversario_thayla c
+   ORDER BY c.created_at;
+END;
+$$;
+
+GRANT EXECUTE ON FUNCTION public.listar_confirmados_thayla(TEXT) TO anon;
+
+-- Conferir que ninguém lê a tabela direto (deve voltar VAZIO):
+--
+-- SELECT policyname, cmd FROM pg_policies
+--  WHERE tablename IN ('confirmacoes_aniversario_thayla', 'config_admin_thayla');

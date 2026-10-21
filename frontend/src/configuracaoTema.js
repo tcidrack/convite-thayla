@@ -103,6 +103,8 @@ export const tema = {
   // Tabela e funcao do Supabase (ver database.sql)
   tabelaConfirmacoes: 'confirmacoes_aniversario_thayla',
   funcaoConfirmar: 'confirmar_presenca_thayla',
+  // A /admin le a lista por esta funcao, que pede a senha (database.sql, bloco 7)
+  funcaoListar: 'listar_confirmados_thayla',
 }
 
 function converterDataGoogle(dataBR) {
