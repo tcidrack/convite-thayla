@@ -55,7 +55,6 @@ export const tema = {
     borboletas: '/assets/borboletas.png',
     // enfeites espalhados pelo convite (gerados por arte/gerar-recortes.py)
     floresGalho: '/assets/flores-galho.png',
-    fitinha: '/assets/fitinha.png',
     fitinha3: '/assets/fitinha-3.png',
     fitinha4: '/assets/fitinha-4.png',
     balao: '/assets/balao.png',

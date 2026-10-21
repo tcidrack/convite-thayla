@@ -14,3 +14,6 @@ dist-ssr
 
 # cache do Python dos scripts de arte/
 __pycache__/
+
+# fotos da aniversariante: ficam so no computador, nunca no repositorio
+fotos-thayla/

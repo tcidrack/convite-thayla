@@ -186,17 +186,6 @@ body {
   position: relative;
 }
 
-/* fitinha (laco rosa) no topo, ao lado da ponta direita da faixa */
-.fitinha {
-  position: absolute;
-  z-index: -1;
-  width: 56px;
-  right: -26px;
-  top: -40px;
-  transform-origin: 50% 0;
-  animation: balancar 5s ease-in-out infinite;
-}
-
 .nome {
   margin: 2px 0 0;
   font-family: var(--fonte-nome);
@@ -286,24 +275,18 @@ body {
   gap: 16px;
 }
 
-/* serpentina caindo pela esquerda dos selos */
-/* serpentina saindo da perninha do T do nome. O desenho original comeca em
-   cima a esquerda e desce para a direita. Espelhado em torno da quina de cima
-   a esquerda (transform-origin 0 0), essa ponta fica parada no `left/top`
-   (o pe do T) e o resto da serpentina cai para a esquerda. */
+/* serpentina saindo da perninha do T do nome. O desenho comeca em cima a
+   esquerda e termina na ponta fina embaixo a direita: e essa ponta que fica
+   presa no pe do T (quina de baixo a direita no `right/bottom`, que tambem e o
+   eixo do balanco), e a serpentina sobe para a esquerda. */
 .fitinha-4 {
   position: absolute;
   z-index: 1;
   width: 60px;
-  left: 8px;
-  top: 62%;
-  transform-origin: 0 0;
-  animation: balancar-espelhado 5.5s ease-in-out infinite;
-}
-
-@keyframes balancar-espelhado {
-  0%, 100% { transform: scaleX(-1) rotate(-5deg); }
-  50%      { transform: scaleX(-1) rotate(5deg); }
+  right: calc(100% - 8px);
+  bottom: 38%;
+  transform-origin: 100% 100%;
+  animation: balancar 5.5s ease-in-out infinite;
 }
 
 /* balao flutuando ao lado do nome, a direita */
@@ -311,8 +294,8 @@ body {
   position: absolute;
   z-index: 1;
   width: 44px;
-  right: -52px;
-  top: -6px;
+  right: -62px;
+  top: 10px;
   transform-origin: 50% 100%;
   animation: balao 6s ease-in-out infinite;
 }
@@ -1032,7 +1015,6 @@ body {
   .idade-numero     { width: 52px; }
   .idade-texto      { font-size: 32px; }
   .selo-data        { width: 100px; }
-  .fitinha          { width: 48px; right: -20px; top: -34px; }
   .sapatilha        { width: 64px; }
   .fitinha-3        { width: 62px; }
   .fitinha-4        { width: 50px; }

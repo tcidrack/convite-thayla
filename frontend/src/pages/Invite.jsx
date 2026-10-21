@@ -124,7 +124,6 @@ export default function Invite() {
 
         <div className="convite-conteudo">
           <div className="faixa">
-            <img src={r.fitinha} alt="" className="enfeite fitinha" />
             {/* Texto em arco, acompanhando a curva da faixa. O viewBox tem o
                 tamanho do faixa.png, entao o arco escala junto com ela. */}
             <svg className="faixa-svg" viewBox="0 0 640 188" aria-label={tema.tituloFita}>

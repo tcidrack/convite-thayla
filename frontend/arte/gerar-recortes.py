@@ -53,7 +53,6 @@ RECORTES = [
 
     # --- enfeites em PNG transparente ---
     ("circulo.png",       "pronto", (0.0, 0.0, 1.0, 1.0), 260, "circulo", None),
-    ("fitinha-rosa.png",   "pronto", (0.0, 0.0, 1.0, 1.0), 220, "fitinha", None),
     ("fitinha-rosa-3.png", "pronto", (0.0, 0.0, 1.0, 1.0), 240, "fitinha-3", None),
     ("fitinha-rosa-4.png", "pronto", (0.0, 0.0, 1.0, 1.0), 200, "fitinha-4", None),
     ("balão.png",          "pronto", (0.0, 0.0, 1.0, 1.0), 160, "balao", None),
