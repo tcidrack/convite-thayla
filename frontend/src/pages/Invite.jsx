@@ -124,6 +124,7 @@ export default function Invite() {
 
         <div className="convite-conteudo">
           <div className="faixa">
+            <img src={r.fitinha} alt="" className="enfeite fitinha" />
             {/* Texto em arco, acompanhando a curva da faixa. O viewBox tem o
                 tamanho do faixa.png, entao o arco escala junto com ela. */}
             <svg className="faixa-svg" viewBox="0 0 640 188" aria-label={tema.tituloFita}>
@@ -137,8 +138,9 @@ export default function Invite() {
           </div>
 
           <div className="nome-area">
+            <img src={r.fitinha4} alt="" className="enfeite fitinha-4" />
             <h1 className="nome">{tema.nome}</h1>
-            <img src={r.fitinha} alt="" className="enfeite fitinha" />
+            <img src={r.balao} alt="" className="enfeite balao" />
           </div>
 
           <div className="destaque">
@@ -159,8 +161,6 @@ export default function Invite() {
           </div>
 
           <div className="selos">
-            <img src={r.fitinha4} alt="" className="enfeite fitinha-4" />
-            <img src={r.balao} alt="" className="enfeite balao" />
             <div className="selo-data">
               <span className="selo-numero">{tema.dataEvento.dia}</span>
               <span className="selo-texto">{tema.dataEvento.mes}</span>

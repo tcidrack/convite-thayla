@@ -186,12 +186,13 @@ body {
   position: relative;
 }
 
-/* fitinha enrolada ao lado do nome */
+/* fitinha (laco rosa) no topo, ao lado da ponta direita da faixa */
 .fitinha {
   position: absolute;
-  width: 62px;
-  right: -64px;
-  top: 8px;
+  z-index: -1;
+  width: 56px;
+  right: -26px;
+  top: -40px;
   transform-origin: 50% 0;
   animation: balancar 5s ease-in-out infinite;
 }
@@ -286,23 +287,32 @@ body {
 }
 
 /* serpentina caindo pela esquerda dos selos */
+/* serpentina saindo da perninha do T do nome. O desenho original comeca em
+   cima a esquerda e desce para a direita. Espelhado em torno da quina de cima
+   a esquerda (transform-origin 0 0), essa ponta fica parada no `left/top`
+   (o pe do T) e o resto da serpentina cai para a esquerda. */
 .fitinha-4 {
   position: absolute;
   z-index: 1;
-  width: 58px;
-  left: -50px;
-  top: 14px;
-  transform-origin: 70% 0;
-  animation: balancar 5.5s ease-in-out infinite;
+  width: 60px;
+  left: 8px;
+  top: 62%;
+  transform-origin: 0 0;
+  animation: balancar-espelhado 5.5s ease-in-out infinite;
 }
 
-/* balao flutuando pela direita dos selos */
+@keyframes balancar-espelhado {
+  0%, 100% { transform: scaleX(-1) rotate(-5deg); }
+  50%      { transform: scaleX(-1) rotate(5deg); }
+}
+
+/* balao flutuando ao lado do nome, a direita */
 .balao {
   position: absolute;
   z-index: 1;
-  width: 48px;
-  right: -46px;
-  top: -18px;
+  width: 44px;
+  right: -52px;
+  top: -6px;
   transform-origin: 50% 100%;
   animation: balao 6s ease-in-out infinite;
 }
@@ -1022,11 +1032,11 @@ body {
   .idade-numero     { width: 52px; }
   .idade-texto      { font-size: 32px; }
   .selo-data        { width: 100px; }
-  .fitinha          { width: 50px; right: -50px; }
+  .fitinha          { width: 48px; right: -20px; top: -34px; }
   .sapatilha        { width: 64px; }
   .fitinha-3        { width: 62px; }
-  .fitinha-4        { width: 48px; left: -40px; }
-  .balao            { width: 40px; right: -38px; }
+  .fitinha-4        { width: 50px; }
+  .balao            { width: 38px; right: -44px; }
   .selo-numero      { font-size: 29px; }
   .selo-texto       { font-size: 13px; }
   .mensagem-final   { font-size: 30px; }
