@@ -58,13 +58,14 @@ body {
   100% { transform: translateX(0); }
 }
 
+/* borboletas presas ao lado do selo da hora (dentro de .selos), e nao por
+   porcentagem da altura do cartao, que mudava de lugar conforme a tela */
 .borboletas {
   position: absolute;
-  width: 15%;
-  max-width: 64px;
-  height: auto;
-  top: 30%;
-  right: 5%;
+  z-index: 1;
+  width: 48px;
+  right: -50px;
+  top: 6px;
   animation: voar 7s ease-in-out infinite;
 }
 
@@ -1186,6 +1187,7 @@ body {
   .fitinha-3        { width: 62px; }
   .fitinha-4        { width: 50px; }
   .balao            { width: 38px; right: -44px; }
+  .borboletas       { width: 40px; right: -40px; }
   .selo-numero      { font-size: 29px; }
   .selo-texto       { font-size: 13px; }
   .mensagem-final   { font-size: 30px; }

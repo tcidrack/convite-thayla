@@ -161,6 +161,7 @@ export default function Invite() {
           </div>
 
           <div className="selos">
+            <img src={r.borboletas} alt="" className="enfeite borboletas" />
             <div className="selo-data">
               <span className="selo-numero">{tema.dataEvento.dia}</span>
               <span className="selo-texto">{tema.dataEvento.mes}</span>

@@ -24,7 +24,7 @@ export default function Splash() {
 
   return (
     <div className="splash-container">
-      <Cenario borboletas={false} />
+      <Cenario />
 
       <p className="splash-titulo">{tema.envelope.convite}</p>
 

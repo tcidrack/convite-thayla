@@ -109,7 +109,7 @@ export default function Admin() {
 
   return (
     <div className="admin-page">
-      <Cenario borboletas={false} />
+      <Cenario />
 
       <div className="admin-card">
         <h1>Convidados confirmados</h1>

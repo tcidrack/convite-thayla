@@ -1,7 +1,8 @@
 import { tema } from "../configuracaoTema"
 
-// Nuvens, borboletas e brilhos que ficam atras do conteudo. Compartilhado
-// entre o envelope, o convite e a /admin para as tres telas parecerem uma so.
+// Nuvens e brilhos que ficam atras do conteudo. Compartilhado entre o
+// envelope, o convite e a /admin para as tres telas parecerem uma so.
+// (As borboletas ficam no convite, presas ao lado dos selos de data/hora.)
 
 // Posicoes fixas (e nao Math.random) para o desenho nao mudar a cada render.
 const BRILHOS = [
@@ -17,14 +18,13 @@ const BRILHOS = [
   { x: 92, y: 94, t: 8, d: 0.9 },
 ]
 
-export default function Cenario({ borboletas = true }) {
+export default function Cenario() {
   const r = tema.recursos
   return (
     <div className="cenario" aria-hidden="true">
       <img src={r.nuvem1} alt="" className="nuvem nuvem-a" />
       <img src={r.nuvem2} alt="" className="nuvem nuvem-b" />
       <img src={r.nuvem1} alt="" className="nuvem nuvem-c" />
-      {borboletas && <img src={r.borboletas} alt="" className="borboletas" />}
       {BRILHOS.map((b, i) => (
         <span
           key={i}
