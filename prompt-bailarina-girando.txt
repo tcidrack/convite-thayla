@@ -1,0 +1,46 @@
+PROMPT - BAILARINA GIRANDO (versao 2, ajustada depois da recusa do Veo)
+
+Como usar:
+1. Anexe o arquivo frontend/public/assets/bailarina.png e cole o PROMPT abaixo.
+2. Se o Gemini recusar de novo, mande SO o texto, sem anexar a imagem
+   (sai uma bailarina parecida, nao identica).
+3. Outras IAs que costumam aceitar personagem de desenho: Kling (klingai.com),
+   Hailuo/MiniMax e Runway. O mesmo prompt serve.
+
+==================== PROMPT ====================
+
+A porcelain music box ballerina figurine in a soft 3D cartoon style, with a blonde bun,
+a small golden tiara with pink gems, a pink satin bodice and a fluffy pink tulle tutu,
+pink ballet slippers.
+
+The figurine slowly spins a full 360 degrees in place, like a music box turning, standing
+on an invisible base. The tutu flares and sways softly with the rotation. Arms stay
+gracefully extended. It ends in exactly the same front-facing pose it started in.
+
+Keep the design identical to the reference image: same colors, outfit, hair, tiara and
+art style. No new objects, no text, no sparkles, no particles.
+
+Static camera, locked-off, front view, the whole figurine always visible and centered
+with space around it, no zoom, no pan, no cut. Solid flat pure chroma green background
+(#00FF00), evenly lit, no shadows on the background, no floor, no music box base visible.
+
+4 seconds, smooth, seamless loop (last frame matches the first frame).
+
+==================== PROMPT NEGATIVO (se a ferramenta tiver o campo) ====================
+
+background scenery, visible music box, floor, shadows on background, camera movement,
+zoom, morphing face, extra limbs, changing outfit, changing hair color, blur, text,
+watermark, sparkles
+
+==================== DICAS ====================
+
+- Se a ferramenta deixar, envie o mesmo PNG como primeiro E ultimo quadro (Kling/Runway
+  tem essa opcao). Assim o video emenda sem pulo quando repete.
+- Se o giro sair rapido demais, troque "slowly spins" por "very slowly spins".
+- Baixe em MP4 na maior resolucao disponivel e salve como imagens/bailarina-girando.mp4.
+
+==================== SE NENHUMA IA GERAR ====================
+
+Da para fazer o giro sem IA: a propria imagem da bailarina "vira" no convite, com um
+pulinho, de tempos em tempos (como a pirueta que ja existe no envelope).
+Fica menos realista que um video, mas funciona em qualquer celular. E so pedir.

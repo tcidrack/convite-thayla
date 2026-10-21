@@ -1,0 +1,16 @@
+node_modules
+dist
+dist-ssr
+*.log
+
+# chaves do Supabase: ficam so na maquina e nas variaveis da Vercel
+.env
+.env.*
+
+.vercel
+.vscode/*
+.idea
+.DS_Store
+
+# cache do Python dos scripts de arte/
+__pycache__/
