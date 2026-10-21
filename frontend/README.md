@@ -41,6 +41,16 @@ guardado, em `config_admin_thayla`). Para trocar a senha, rode o bloco 7 de novo
 
 ## Deploy (Vercel)
 
+Publicado em **https://convite-thayla-bice.vercel.app** (projeto `convite-thayla`, time
+`cidracks-projects`). O deploy é feito pela CLI, de dentro desta pasta:
+
+```bash
+vercel deploy --prod
+```
+
+O `.vercelignore` deixa de fora o `.env`, os scripts de `arte/` e `ferramentas/`; as chaves
+vão como variáveis de ambiente do projeto na Vercel (Production e Preview).
+
 Checklist antes de publicar:
 
 1. **`database.sql` rodado** no Supabase com a senha da `/admin` trocada. Conferir no SQL
