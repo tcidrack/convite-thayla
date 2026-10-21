@@ -240,7 +240,7 @@ body {
 }
 
 .idade-numero {
-  width: 100px;
+  width: 120px;
   height: auto;
   filter: drop-shadow(0 4px 6px rgba(194, 91, 122, 0.22));
   animation: pulsar 3s ease-in-out infinite;
@@ -1180,7 +1180,7 @@ body {
 @media (max-width: 380px) {
   .convite-conteudo { padding-top: 80px; }
   .mensagem         { font-size: 14px; }
-  .idade-numero     { width: 52px; }
+  .idade-numero     { width: 120px; }
   .idade-texto      { font-size: 32px; }
   .selo-data        { width: 100px; }
   .sapatilha        { width: 64px; }
