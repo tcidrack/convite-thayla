@@ -32,7 +32,7 @@ import re
 import subprocess
 import numpy as np
 import imageio_ffmpeg
-from PIL import Image
+from PIL import Image, ImageFilter
 
 FRONTEND = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ORIGEM = os.path.join(os.path.dirname(FRONTEND), "imagens", "bailarina-girando.mp4")
@@ -40,17 +40,22 @@ DESTINO = os.path.join(FRONTEND, "public", "assets", "bailarina-girando.mp4")
 POSTER = os.path.join(FRONTEND, "public", "assets", "bailarina-girando-poster.webp")
 ANIMADO = os.path.join(FRONTEND, "public", "assets", "bailarina-girando-animado.webp")
 
-# WebP de reserva: metade dos quadros e menor, para nao passar muito de 1,5 MB
-ANIMADO_PULO = 2        # usa 1 quadro a cada 2 (24 fps -> 12 fps)
-ANIMADO_LARGURA = 320
-ANIMADO_QUALIDADE = 68
-ANIMADO_QUALIDADE_ALFA = 50
+# WebP de reserva. E o que aparece em computador sem decodificacao de video
+# pela placa (inclusive o de quem montou o convite), entao a qualidade conta:
+# a versao "economica" (320px, 12fps, qualidade 68) ficou borrada e travada.
+# So e baixado quando o video falha, por isso pode ser mais pesado.
+ANIMADO_PULO = 1        # todos os quadros (24 fps): giro liso
+ANIMADO_LARGURA = 456
+ANIMADO_QUALIDADE = 78
+ANIMADO_QUALIDADE_ALFA = 70  # 78/70 a 24fps fica em ~5 MB; 80/80 passava de 6,5 MB
 
 FPS = 24
-# ~2x a largura em CSS (a bailarina ocupa metade de um card de 430px)
-LARGURA = 400
-# Qualidade do H.264: menor = melhor e maior. 24 fica sem artefato visivel.
-CRF = 24
+# A bailarina ocupa ~215px de CSS, que viram 430-645px reais em tela 2x-3x.
+# 456 e a largura nativa dela no video original: reduzir abaixo disso era o
+# que deixava borrado (o navegador ampliava de volta).
+LARGURA = 456
+# Qualidade do H.264: menor = melhor e maior. 18 fica praticamente sem perda.
+CRF = 18
 
 # "Verdice" = G - max(R, B). O fundo do video fica em ~145; pele e tutu ficam
 # abaixo de zero. Entre VERDE_MIN e VERDE_MAX o alfa faz a rampa da borda.
@@ -95,7 +100,13 @@ def tirar_verde(rgb, cor_fundo):
     # nunca passa do maior entre vermelho e azul. Pele, rosa e loiro ja tem
     # G abaixo disso, entao so o reflexo verde e afetado.
     cor[..., 1] = np.minimum(cor[..., 1], np.maximum(cor[..., 0], cor[..., 2]))
-    return cor.astype(np.uint8), (alfa * 255).astype(np.uint8)
+    # Acabamento da borda: os pixels mais externos, quase transparentes, saem
+    # acinzentados (o JPEG do video tem ruido justamente ali) e o contorno do
+    # cabelo ficava serrilhado. Encolher a borda 1px e suavizar de leve some com
+    # isso sem mudar o desenho.
+    borda = Image.fromarray((alfa * 255).astype(np.uint8))
+    borda = borda.filter(ImageFilter.MinFilter(3)).filter(ImageFilter.GaussianBlur(0.8))
+    return cor.astype(np.uint8), np.array(borda)
 
 
 def gerar():
