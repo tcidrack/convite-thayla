@@ -46,7 +46,9 @@ RECORTES = [
     ("bailarina.jpg",   "flood",    (0.0, 0.0, 1.0, 1.0), 520, "bailarina", None),
     ("bailarina-2.jpg", "flood",    (0.0, 0.0, 1.0, 1.0), 420, "bailarina-envelope", None),
     ("faixa.jpg",       "flood",    (0.0, 0.0, 1.0, 1.0), 640, "faixa", None),
-    ("idade.jpg",       "flood",    (0.0, 0.0, 1.0, 1.0), 160, "numero", None),
+    # balao "1" (o PNG original tem ~46% de margem transparente: recortar e o
+    # que deixa o "aninho" encostar no numero)
+    ("numero.png",      "pronto",   (0.0, 0.0, 1.0, 1.0), 140, "numero", None),
     # nuvens.jpg tem dois grupos de nuvens, um em cima do outro
     ("nuvens.jpg",      "aquarela", (0.0, 0.0, 1.0, 0.5), 420, "nuvem-1", None),
     ("nuvens.jpg",      "aquarela", (0.0, 0.5, 1.0, 1.0), 420, "nuvem-2", None),

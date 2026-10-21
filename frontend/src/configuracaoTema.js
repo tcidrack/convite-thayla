@@ -49,7 +49,7 @@ export const tema = {
     bailarinaGirandoAnimado: '/assets/bailarina-girando-animado.webp',
     bailarinaEnvelope: '/assets/bailarina-envelope.webp',
     faixa: '/assets/faixa.png',
-    numero: '/assets/numero.png',
+    numero: '/assets/numero.webp',
     nuvem1: '/assets/nuvem-1.png',
     nuvem2: '/assets/nuvem-2.png',
     borboletas: '/assets/borboletas.png',
