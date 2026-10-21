@@ -41,8 +41,9 @@ guardado, em `config_admin_thayla`). Para trocar a senha, rode o bloco 7 de novo
 
 ## Deploy (Vercel)
 
-Publicado em **https://convite-thayla-bice.vercel.app** (projeto `convite-thayla`, time
-`cidracks-projects`). O deploy é feito pela CLI, de dentro desta pasta:
+Publicado em **https://convite-thayla-cidrack.vercel.app** (projeto `convite-thayla`, time
+`cidracks-projects`; o domínio está cadastrado no projeto, então cada deploy de produção já
+atualiza esse link). O deploy é feito pela CLI, de dentro desta pasta:
 
 ```bash
 vercel deploy --prod
