@@ -94,7 +94,7 @@ export const tema = {
   calendario: {
     // << EDITE AQUI >> endereco, link do maps e horarios
     endereco: 'R. Exemplo, 000 - Granja Portugal',
-    mapsUrl: 'https://maps.google.com/?q=Rua+Antônio+Nery+939',
+    mapsUrl: 'https://maps.google.com/?q=Granja+Portugal,+Fortaleza',
     eventoNome: 'Aniversário da Thayla',
     dataInicio: '19:00 04/11/2026', // formato HH:MM DD/MM/AAAA
     dataFim: '', // opcional; vazio usa o mesmo horario de inicio
